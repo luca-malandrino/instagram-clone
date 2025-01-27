@@ -38,8 +38,10 @@ function renderFeed() {
       <div class="painter-profile">
         <div class="container">
           <img src=${user.avatar} alt="${user.name}'s profile picture.">
-          <h2>${user.name}</h2>
-          <p>${user.location}</p>
+          <div>
+            <h2>${user.name}</h2>
+            <p>${user.location}</p>
+          </div>
         </div>
       </div>
 
@@ -55,7 +57,7 @@ function renderFeed() {
 
       <div class="post-stats">
         <div class="container">
-          <p class="like-num">${user.likes} likes</p>
+          <h2 class="like-num">${user.likes} likes</h2>
           <p><span class="username">${user.username}</span> ${user.comment}</p>
         </div>
       </div>
