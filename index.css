@@ -8,6 +8,7 @@ body {
   border: 5px solid black;
   border-radius: 30px;
   font-family: "Source Sans Pro", sans-serif;
+  color: #252525;
 }
 
 h2, .username {
@@ -118,5 +119,38 @@ fieldset {
 
 .active {
   display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 500px;
+  height: 600px;
+  pointer-events: all !important;
+}
+
+.active input {
   position: absolute;
+  left: -10990%;
+}
+
+.active label i {
+  transform: scale(2.5);
+  padding: 20px;
+  background-color: #0095ff;
+  color: #fff;
+  clip-path: circle(40%);
+  display: block;
+  margin: 40px auto 70px auto;
+  width: 56px;
+  cursor: pointer;
+}
+
+.active label i:hover,
+.active label i:focus {
+  background-color: #0095ffcf;
+}
+
+textarea {
+  display: block;
 }

@@ -69,3 +69,15 @@ function renderFeed() {
 }
 
 renderFeed();
+
+document.getElementById("new-post-btn").addEventListener("click", () => {
+  document.querySelector("fieldset").classList.add("active");
+  document.body.style.pointerEvents = "none";
+});
+
+document.getElementById("new-post-img").addEventListener("change", () => {
+  if(document.getElementById('new-post-img').files[0]){
+    document.querySelector(".fa-regular").classList.replace("fa-image", "fa-check");
+    document.querySelector(".fa-regular").classList.replace("fa-regular", "fa-solid");
+  }
+})
