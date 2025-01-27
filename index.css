@@ -28,6 +28,24 @@ h2, .username {
   margin: 0 auto;
 }
 
+#new-post-btn {
+  border: none;
+  color: white;
+  background-color: #0095ff;
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-left: calc(100% - 80px);
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+#new-post-btn:hover, #new-post-btn:focus {
+  opacity: .89
+}
+
 .post-img {
   width: 620px;
   margin: 0 auto 30px auto;
@@ -37,7 +55,7 @@ h2, .username {
 header {
   border-bottom: 1px solid #c4c4c4;
   height: 120px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 header .container {
@@ -91,5 +109,14 @@ header img {
 
 .btn-container .container img:hover,
 .btn-container .container img:focus {
-  opacity: 0.8;
+  opacity: 0.9;
+}
+
+fieldset {
+  display: none;
+}
+
+.active {
+  display: block;
+  position: absolute;
 }
