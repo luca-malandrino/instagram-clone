@@ -36,28 +36,34 @@ function renderFeed() {
     feed += 
     `
       <div class="painter-profile">
-        <img src=${user.avatar} alt="A selfie / self-portrait of ${user.name}.">
-        <h2>${user.name}</h2>
-        <p>${user.location}</p>
+        <div class="container">
+          <img src=${user.avatar} alt="${user.name}'s profile picture.">
+          <h2>${user.name}</h2>
+          <p>${user.location}</p>
+        </div>
       </div>
 
-      <img src=${user.post}>
+      <img src=${user.post} class="post-img" alt="A selfie / self-portrait of ${user.name}.">
 
       <div class="btn-container">
-        <img src="images/icon-heart.png" alt="Like button.">
-        <img src="images/icon-comment.png" alt="Comment button.">
-        <img src="images/icon-dm.png" alt="DM button.">
+        <div class="container">
+          <img src="images/icon-heart.png" alt="Like button.">
+          <img src="images/icon-comment.png" alt="Comment button.">
+          <img src="images/icon-dm.png" alt="DM button.">
+        </div>
       </div>
 
       <div class="post-stats">
-        <p class="like-num">${user.likes} likes</p>
-        <p><span class="username">${user.username}</span> ${user.comment}</p>
+        <div class="container">
+          <p class="like-num">${user.likes} likes</p>
+          <p><span class="username">${user.username}</span> ${user.comment}</p>
+        </div>
       </div>
     `
     ; 
   }
 
-  document.body.innerHTML += feed;
+  document.querySelector("main").innerHTML += feed;
 }
 
 renderFeed();

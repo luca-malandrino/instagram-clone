@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 620px;
+  margin: 0 auto;
+}
+
+.post-img {
+  width: 620px;
+  margin: 0 auto;
+  display: block;
+}
