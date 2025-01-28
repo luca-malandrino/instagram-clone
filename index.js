@@ -29,12 +29,6 @@ const posts = [
 ]
 
 const main = document.querySelector("main");
-const newPostBtn = document.getElementById("new-post-btn");
-const postFieldset = document.querySelector("fieldset");
-const newPostImg = document.getElementById("new-post-img");
-const imgIcon = document.querySelector("fa-regular");
-const postBtn = document.getElementById("post-btn");
-const comment = document.querySelector("textaerea");
 
 function renderFeed() {
   let feed = "";
@@ -78,32 +72,46 @@ function renderFeed() {
 
 renderFeed();
 
-newPostBtn.addEventListener("click", () => {
-  postFieldset.classList.add("active");
+document.getElementById("new-post-btn").addEventListener("click", () => {
+  document.querySelector("fieldset").classList.add("active");
   document.body.style.pointerEvents = "none";
-  postFieldset.style.pointerEvents = "all";
 });
 
-postFieldset.addEventListener("change", () => {
-  if(newPostImg.files[0]){
-    imgIcon.classList.replace("fa-image", "fa-check");
-    imgIcon.classList.replace("fa-regular", "fa-solid");
+document.getElementById("new-post-img").addEventListener("change", () => {
+  if(document.getElementById("new-post-img").files[0]){
+    document.querySelector(".fa-regular").classList.replace("fa-image", "fa-check");
+    document.querySelector(".fa-regular").classList.replace("fa-regular", "fa-solid");
   }
 })
 
-postBtn.addEventListener("click", () => {
-  imgIcon.classList.replace("fa-check", "fa-image");
-  imgIcon.classList.replace("fa-solid", "fa-regular");
+document.getElementById("post-btn").addEventListener("click", () => {
+  document.querySelector("fieldset").classList.remove("active");
+  document.querySelector(".fa-solid").classList.replace("fa-check", "fa-image");
+  document.querySelector(".fa-solid").classList.replace("fa-solid", "fa-regular");
 
   posts.unshift({
     name: "Per Harald Borgen",
     username: "tharealphd",
     location: "Oslo, Norway",
-    avatar: "images/user-avatar.jpg",
-    post: newPostImg.files[0],
-    comment: comment.value,
-    likes: Math.floor(Math.random() * 10000) + 1
-  });
+    avatar: "images/user-avatar.png",
+    post: URL.createObjectURL(document.getElementById("new-post-img").files[0]),
+    comment: document.querySelector("textarea").value,
+    likes: Math.floor(Math.random() * 100000) + 1
+  })
 
+  document.querySelector("main").innerHTML = `<div class="container">
+      <button aria-label="New post." id="new-post-btn">+</button>
+    </div>
+
+    <fieldset>
+      <input type="file" id="new-post-img" accept="image/*" aria-label="Select an image to post.">
+      <label for="new-post-img"><i class="fa-regular fa-image"></i></label>
+
+      <label for="comment">Comment</label>
+      <textarea id="comment"></textarea>
+
+      <button id="post-btn" type="submit">Post</button>
+    </fieldset>`
   renderFeed();
-});
+  document.body.style.pointerEvents = "all";
+})

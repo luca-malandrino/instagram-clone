@@ -44,7 +44,7 @@ h2, .username {
 }
 
 #new-post-btn:hover, #new-post-btn:focus {
-  opacity: .89
+  opacity: .89;
 }
 
 .post-img {
