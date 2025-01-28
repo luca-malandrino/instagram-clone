@@ -28,6 +28,14 @@ const posts = [
   }
 ]
 
+const main = document.querySelector("main");
+const newPostBtn = document.getElementById("new-post-btn");
+const postFieldset = document.querySelector("fieldset");
+const newPostImg = document.getElementById("new-post-img");
+const imgIcon = document.querySelector("fa-regular");
+const postBtn = document.getElementById("post-btn");
+const comment = document.querySelector("textaerea");
+
 function renderFeed() {
   let feed = "";
 
@@ -65,19 +73,37 @@ function renderFeed() {
     ; 
   }
 
-  document.querySelector("main").innerHTML += feed;
+  main.innerHTML += feed;
 }
 
 renderFeed();
 
-document.getElementById("new-post-btn").addEventListener("click", () => {
-  document.querySelector("fieldset").classList.add("active");
+newPostBtn.addEventListener("click", () => {
+  postFieldset.classList.add("active");
   document.body.style.pointerEvents = "none";
+  postFieldset.style.pointerEvents = "all";
 });
 
-document.getElementById("new-post-img").addEventListener("change", () => {
-  if(document.getElementById('new-post-img').files[0]){
-    document.querySelector(".fa-regular").classList.replace("fa-image", "fa-check");
-    document.querySelector(".fa-regular").classList.replace("fa-regular", "fa-solid");
+postFieldset.addEventListener("change", () => {
+  if(newPostImg.files[0]){
+    imgIcon.classList.replace("fa-image", "fa-check");
+    imgIcon.classList.replace("fa-regular", "fa-solid");
   }
 })
+
+postBtn.addEventListener("click", () => {
+  imgIcon.classList.replace("fa-check", "fa-image");
+  imgIcon.classList.replace("fa-solid", "fa-regular");
+
+  posts.unshift({
+    name: "Per Harald Borgen",
+    username: "tharealphd",
+    location: "Oslo, Norway",
+    avatar: "images/user-avatar.jpg",
+    post: newPostImg.files[0],
+    comment: comment.value,
+    likes: Math.floor(Math.random() * 10000) + 1
+  });
+
+  renderFeed();
+});
