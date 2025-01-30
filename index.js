@@ -36,30 +36,32 @@ function renderFeed() {
     let user = posts[i];
     feed += 
     `
-      <div class="painter-profile">
-        <div class="container">
-          <img src=${user.avatar} alt="${user.name}'s profile picture.">
-          <div>
-            <h2>${user.name}</h2>
-            <p>${user.location}</p>
+      <div>
+        <div class="painter-profile">
+          <div class="container">
+            <img src=${user.avatar} alt="${user.name}'s profile picture.">
+            <div>
+              <h2>${user.name}</h2>
+              <p>${user.location}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <img src=${user.post} class="post-img" alt="A selfie / self-portrait of ${user.name}.">
+        <img src=${user.post} id="post-${i}" class="post-img" alt="A selfie / self-portrait of ${user.name}.">
 
-      <div class="btn-container">
-        <div class="container">
-          <img src="images/icon-heart.png" alt="Like button.">
-          <img src="images/icon-comment.png" alt="Comment button.">
-          <img src="images/icon-dm.png" alt="DM button.">
+        <div class="btn-container">
+          <div class="container">
+            <img src="images/icon-heart.png" class="like-btn" id="like-btn-${i}" alt="Like button.">
+            <img src="images/icon-comment.png" alt="Comment button.">
+            <img src="images/icon-dm.png" alt="DM button.">
+          </div>
         </div>
-      </div>
 
-      <div class="post-stats">
-        <div class="container">
-          <h2 class="like-num">${user.likes} likes</h2>
-          <p><span class="username">${user.username}</span> ${user.comment}</p>
+        <div class="post-stats">
+          <div class="container">
+            <h2 class="like-num" id="like-${i}">${user.likes} likes</h2>
+            <p><span class="username">${user.username}</span> ${user.comment}</p>
+          </div>
         </div>
       </div>
     `
@@ -74,6 +76,8 @@ function renderFeed() {
   const imgIcon = document.querySelector(".fa-regular");
   const postBtn = document.getElementById("post-btn");
   const comment = document.querySelector("textarea");
+  const postImgs = document.querySelectorAll(".post-img");
+  const likeBtns = document.querySelectorAll(".like-btn");
 
   newPostBtn.addEventListener("click", () => {
     newPostFieldset.classList.add("active");
@@ -106,7 +110,8 @@ function renderFeed() {
         likes: Math.floor(Math.random() * 100000) + 1
       })
     
-      main.innerHTML = `<div class="container">
+      main.innerHTML = `
+        <div class="container">
           <button aria-label="New post." id="new-post-btn">+</button>
         </div>
     
@@ -123,7 +128,44 @@ function renderFeed() {
       renderFeed();
       document.body.style.pointerEvents = "all";
     }
+
   })
+
+  postImgs.forEach(postImg => {
+    postImg.addEventListener("dblclick", () => {
+      let liked = "images/icon-heart - Copia.png";
+      let notLiked = "images/icon-heart.png";
+      let postIndex = Number(postImg.id.split("-").pop());
+      let likeEl = document.getElementById("like-" + postIndex);
+
+      if(likeBtns[postIndex].src.endsWith(notLiked)) {
+        likeEl.textContent = (Number(likeEl.textContent.split(" ").shift()) + 1) + " likes";
+        likeBtns[postIndex].src = liked;
+      } else {
+        likeEl.textContent = (Number(likeEl.textContent.split(" ").shift()) - 1) + " likes";
+        likeBtns[postIndex].src = notLiked;
+      }
+    })
+    
+  })
+
+  likeBtns.forEach(likeBtn => {
+    likeBtn.addEventListener("click", () => {
+      let postIndex = Number(likeBtn.id.split("-").pop());
+      let liked = "images/icon-heart - Copia.png";
+      let notLiked = "images/icon-heart.png";
+      let likeEl = document.getElementById("like-" + postIndex);
+
+      if(likeBtn.src.endsWith(notLiked)) {
+        likeEl.textContent = (Number(likeEl.textContent.split(" ").shift()) + 1) + " likes";
+        likeBtn.src = liked;
+      } else {
+        likeEl.textContent = (Number(likeEl.textContent.split(" ").shift()) - 1) + " likes";
+        likeBtn.src = notLiked;
+      }
+    })
+    
+  }) 
 }
 
 renderFeed();

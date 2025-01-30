@@ -43,7 +43,8 @@ h2, .username {
   cursor: pointer;
 }
 
-#new-post-btn:hover, #new-post-btn:focus {
+#new-post-btn:hover, #new-post-btn:focus,
+#post-btn:hover, #post-btn:focus {
   opacity: .89;
 }
 
@@ -110,7 +111,7 @@ header img {
 
 .btn-container .container img:hover,
 .btn-container .container img:focus {
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 fieldset {
@@ -127,6 +128,8 @@ fieldset {
   width: 500px;
   height: 600px;
   pointer-events: all !important;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
 }
 
 .active input {
@@ -153,4 +156,30 @@ fieldset {
 
 textarea {
   display: block;
+  width: 50%;
+  border: 2px solid #0095ff;
+  margin: 10px 0;
+  font-family: "Roboto", sans-serif;
+  border-radius: 10px;
+  height: 60px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+#post-btn {
+  display: block;
+  background-color: #0095ff;
+  color: #fff;
+  padding: 10px 20px;
+  width: 50%;
+  height: 40px;
+  font-size: 1.1rem;
+  margin: 0 auto;
+  border: none;
+  border-radius: 50px;
+  position: fixed;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
 }
