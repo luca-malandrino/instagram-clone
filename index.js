@@ -28,10 +28,9 @@ const posts = [
   }
 ]
 
-const main = document.querySelector("main");
-
 function renderFeed() {
   let feed = "";
+  const main = document.querySelector("main");
 
   for(let i = 0; i < posts.length; i++) {
     let user = posts[i];
@@ -68,50 +67,63 @@ function renderFeed() {
   }
 
   main.innerHTML += feed;
+
+  const newPostBtn = document.getElementById("new-post-btn");
+  const newPostFieldset = document.querySelector("fieldset");
+  const newPostImg = document.getElementById("new-post-img");
+  const imgIcon = document.querySelector(".fa-regular");
+  const postBtn = document.getElementById("post-btn");
+  const comment = document.querySelector("textarea");
+
+  newPostBtn.addEventListener("click", () => {
+    newPostFieldset.classList.add("active");
+    document.body.style.pointerEvents = "none";
+  });
+  
+  newPostImg.addEventListener("change", () => {
+    if(newPostImg.files[0]){
+      imgIcon.classList.replace("fa-image", "fa-check");
+      imgIcon.classList.replace("fa-regular", "fa-solid");
+    }
+  })
+  
+  postBtn.addEventListener("click", () => {
+    if(!comment.value || !newPostImg.value) {
+      window.alert("select an image and enter a comment");
+    } else {
+      const checkIcon = document.querySelector(".fa-solid");
+      newPostFieldset.classList.remove("active");
+      checkIcon.classList.replace("fa-check", "fa-image");
+      checkIcon.classList.replace("fa-solid", "fa-regular");
+    
+      posts.unshift({
+        name: "Per Harald Borgen",
+        username: "tharealphd",
+        location: "Oslo, Norway",
+        avatar: "images/user-avatar.png",
+        post: URL.createObjectURL(newPostImg.files[0]),
+        comment: comment.value,
+        likes: Math.floor(Math.random() * 100000) + 1
+      })
+    
+      main.innerHTML = `<div class="container">
+          <button aria-label="New post." id="new-post-btn">+</button>
+        </div>
+    
+        <fieldset>
+          <input type="file" id="new-post-img" accept="image/*" aria-label="Select an image to post.">
+          <label for="new-post-img"><i class="fa-regular fa-image"></i></label>
+    
+          <label for="comment">Comment</label>
+          <textarea id="comment"></textarea>
+    
+          <button id="post-btn" type="submit">Post</button>
+        </fieldset>`;
+
+      renderFeed();
+      document.body.style.pointerEvents = "all";
+    }
+  })
 }
 
 renderFeed();
-
-document.getElementById("new-post-btn").addEventListener("click", () => {
-  document.querySelector("fieldset").classList.add("active");
-  document.body.style.pointerEvents = "none";
-});
-
-document.getElementById("new-post-img").addEventListener("change", () => {
-  if(document.getElementById("new-post-img").files[0]){
-    document.querySelector(".fa-regular").classList.replace("fa-image", "fa-check");
-    document.querySelector(".fa-regular").classList.replace("fa-regular", "fa-solid");
-  }
-})
-
-document.getElementById("post-btn").addEventListener("click", () => {
-  document.querySelector("fieldset").classList.remove("active");
-  document.querySelector(".fa-solid").classList.replace("fa-check", "fa-image");
-  document.querySelector(".fa-solid").classList.replace("fa-solid", "fa-regular");
-
-  posts.unshift({
-    name: "Per Harald Borgen",
-    username: "tharealphd",
-    location: "Oslo, Norway",
-    avatar: "images/user-avatar.png",
-    post: URL.createObjectURL(document.getElementById("new-post-img").files[0]),
-    comment: document.querySelector("textarea").value,
-    likes: Math.floor(Math.random() * 100000) + 1
-  })
-
-  document.querySelector("main").innerHTML = `<div class="container">
-      <button aria-label="New post." id="new-post-btn">+</button>
-    </div>
-
-    <fieldset>
-      <input type="file" id="new-post-img" accept="image/*" aria-label="Select an image to post.">
-      <label for="new-post-img"><i class="fa-regular fa-image"></i></label>
-
-      <label for="comment">Comment</label>
-      <textarea id="comment"></textarea>
-
-      <button id="post-btn" type="submit">Post</button>
-    </fieldset>`
-  renderFeed();
-  document.body.style.pointerEvents = "all";
-})
