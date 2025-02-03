@@ -166,6 +166,11 @@ textarea {
   font-size: 1rem;
 }
 
+textarea:focus-visible {
+  outline: none;
+  border: 2px solid #006ebd;
+}
+
 #post-btn {
   display: block;
   background-color: #0095ff;
@@ -182,4 +187,25 @@ textarea {
   left: 50%;
   transform: translate(-50%, 0%);
   cursor: pointer;
+}
+
+.x-btn-container {
+  display: flex;
+}
+
+.x-btn {
+  margin-left: auto;
+  border: 0;
+  background: #fff;
+  font-size: 1.5rem;
+  color: #25252594;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 7px;
+  text-align: center;
+}
+
+.x-btn:hover {
+  background-color: #e6e6e6;
+  color: #252525c0;
 }

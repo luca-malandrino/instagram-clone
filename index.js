@@ -78,6 +78,7 @@ function renderFeed() {
   const comment = document.querySelector("textarea");
   const postImgs = document.querySelectorAll(".post-img");
   const likeBtns = document.querySelectorAll(".like-btn");
+  const xBtn = document.querySelector(".x-btn");
 
   newPostBtn.addEventListener("click", () => {
     newPostFieldset.classList.add("active");
@@ -165,7 +166,17 @@ function renderFeed() {
       }
     })
     
-  }) 
+  })
+
+  xBtn.addEventListener("click", () => {
+    const checkIcon = document.querySelector(".fa-solid");
+    newPostFieldset.classList.remove("active");
+    if(checkIcon){
+      checkIcon.classList.replace("fa-check", "fa-image");
+      checkIcon.classList.replace("fa-solid", "fa-regular");    
+    }
+    document.body.style.pointerEvents = "all";
+  })
 }
 
 renderFeed();
